@@ -32,7 +32,7 @@ namespace TouhouStock
         public static double TransferTax = 0.003;
         public static long ticks;
         public static DateTime dateTime;
-
+        public static int timeState = 1; //1 2 3開盤前 中 後
         //是否開盤
         public static bool marketOpened = false;
         public GameData(Form1 form1)
@@ -44,6 +44,7 @@ namespace TouhouStock
             ticks = new DateTime(1996, 11, 01, 8, 0, 0,
             new CultureInfo("zh-TW", false).Calendar).Ticks;
             dateTime = new DateTime(ticks);
+            //Console.WriteLine(dateTime.Hour);
         }
 
         public void loadDataBase()

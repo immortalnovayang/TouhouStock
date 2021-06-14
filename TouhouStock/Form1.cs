@@ -91,14 +91,48 @@ namespace TouhouStock
                 //時間經過一秒
                 if (GameData.dateTime != null)
                 {
-                    GameData.dateTime = GameData.dateTime.AddMinutes(1);
-                    dateTimeValuelabel.Text = GameData.dateTime.ToString();
+                    //盤後直接暫停 讓玩家有比較多時間進行其他動作
+                    if(GameData.timeState != 3)
+                    {
+                        GameData.dateTime = GameData.dateTime.AddMinutes(1);
+                        dateTimeValuelabel.Text = GameData.dateTime.ToString();
 
-                    // 距離開盤還有60分鐘
-                    // 開盤
-                    //GameData.marketOpened = true;
+                        int leftMin = 60 - GameData.dateTime.Minute;
 
-                    // 收盤(暫停處理股價更新 和 停止買賣功能)
+                        // 開盤
+                        Console.WriteLine("hour "+ GameData.dateTime.Hour);
+                        Console.WriteLine("timeState " + GameData.timeState);
+                        if (GameData.dateTime.Hour == 9 && !GameData.marketOpened)
+                        {
+                            GameData.marketOpened = true;
+                            GameData.timeState = 2;
+                        }
+
+                        //GameData.marketOpened = true;
+
+                        // 收盤(暫停處理股價更新 和 停止買賣功能)
+                        if (GameData.dateTime.Hour == 12 && GameData.marketOpened)
+                        {
+                            GameData.marketOpened = false;
+                            GameData.timeState = 3;
+                            nextDayButton.Enabled = true;
+                        }
+
+                        // 距離開盤還有60分鐘
+                        switch (GameData.timeState)
+                        {
+                            case 1:
+                                dateTipLabel.Text = "距離開盤還有" + leftMin + "分鐘";
+                                break;
+                            case 2:
+                                dateTipLabel.Text = "開盤中";
+                                break;
+                            case 3:
+                                dateTipLabel.Text = "盤後暫停交易";
+                                break;
+                        }
+                    }
+                    
                 }
            
 
@@ -169,6 +203,20 @@ namespace TouhouStock
 
             MyStockForm.setDataSource();
             MyStockForm.ShowDialog();
+        }
+
+        private void nextDayButton_Click(object sender, EventArgs e)
+        {
+            nextDayButton.Enabled = false;
+            GameData.dateTime = GameData.dateTime.AddDays(1);
+
+            long ticks = new DateTime(GameData.dateTime.Year,
+                GameData.dateTime.Month,
+                GameData.dateTime.Day, 8, 0, 0,
+                new CultureInfo("zh-TW", false).Calendar).Ticks;
+            GameData.dateTime = new DateTime(ticks);
+            GameData.marketOpened = false;
+            GameData.timeState = 1;
         }
     }
 

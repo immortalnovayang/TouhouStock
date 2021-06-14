@@ -38,14 +38,15 @@ namespace TouhouStock
             this.dateTimelabel = new System.Windows.Forms.Label();
             this.dateTimeValuelabel = new System.Windows.Forms.Label();
             this.dateTipLabel = new System.Windows.Forms.Label();
+            this.nextDayButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button1.Font = new System.Drawing.Font("新細明體", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button1.Location = new System.Drawing.Point(17, 468);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(211, 73);
+            this.button1.Size = new System.Drawing.Size(173, 73);
             this.button1.TabIndex = 0;
             this.button1.Text = "看上市公司";
             this.button1.UseVisualStyleBackColor = true;
@@ -94,9 +95,9 @@ namespace TouhouStock
             // myStockButton
             // 
             this.myStockButton.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.myStockButton.Location = new System.Drawing.Point(252, 468);
+            this.myStockButton.Location = new System.Drawing.Point(196, 468);
             this.myStockButton.Name = "myStockButton";
-            this.myStockButton.Size = new System.Drawing.Size(211, 73);
+            this.myStockButton.Size = new System.Drawing.Size(173, 73);
             this.myStockButton.TabIndex = 5;
             this.myStockButton.Text = "持股明細";
             this.myStockButton.UseVisualStyleBackColor = true;
@@ -132,11 +133,24 @@ namespace TouhouStock
             this.dateTipLabel.TabIndex = 8;
             this.dateTipLabel.Text = "距離開盤還有60分鐘";
             // 
+            // nextDayButton
+            // 
+            this.nextDayButton.Enabled = false;
+            this.nextDayButton.Font = new System.Drawing.Font("新細明體", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.nextDayButton.Location = new System.Drawing.Point(577, 468);
+            this.nextDayButton.Name = "nextDayButton";
+            this.nextDayButton.Size = new System.Drawing.Size(193, 73);
+            this.nextDayButton.TabIndex = 9;
+            this.nextDayButton.Text = "下回合(明天)";
+            this.nextDayButton.UseVisualStyleBackColor = true;
+            this.nextDayButton.Click += new System.EventHandler(this.nextDayButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(782, 553);
+            this.Controls.Add(this.nextDayButton);
             this.Controls.Add(this.dateTipLabel);
             this.Controls.Add(this.dateTimeValuelabel);
             this.Controls.Add(this.dateTimelabel);
@@ -167,6 +181,7 @@ namespace TouhouStock
         private System.Windows.Forms.Label dateTimelabel;
         private System.Windows.Forms.Label dateTimeValuelabel;
         private System.Windows.Forms.Label dateTipLabel;
+        private System.Windows.Forms.Button nextDayButton;
     }
 }
 
