@@ -55,12 +55,12 @@ namespace TouhouStock
             {
                 if (GameData.loadFinished && GameData.marketOpened)
                 {
-
+                    /*
                     for(int i = 0;i < GameData.companyArray.Count; i++)
                     {
                         CompanyData companyData = GameData.companyArray[i];
                         //漲0.1~1%，0.001  0.01
-
+                    
                         double dice1 = rand.NextDouble() * 100;
                         double dice2 = -rand.NextDouble() * 100;
 
@@ -85,7 +85,7 @@ namespace TouhouStock
                     }
                   
 
-                    stockLabel.Text = gameData.getTotalStock() + "";
+                    stockLabel.Text = gameData.getTotalStock() + "";*/
                 }
 
                 //時間經過一秒
@@ -94,7 +94,7 @@ namespace TouhouStock
                     //盤後直接暫停 讓玩家有比較多時間進行其他動作
                     if(GameData.timeState != 3)
                     {
-                        GameData.dateTime = GameData.dateTime.AddMinutes(1);
+                        GameData.dateTime = GameData.dateTime.AddMinutes(GameData.minEveryTick);
                         dateTimeValuelabel.Text = GameData.dateTime.ToString();
 
                         int leftMin = 60 - GameData.dateTime.Minute;
@@ -106,6 +106,7 @@ namespace TouhouStock
                         {
                             GameData.marketOpened = true;
                             GameData.timeState = 2;
+                            initPriceOfMarketOpened();//初始化開盤價
                         }
 
                         //GameData.marketOpened = true;
@@ -138,6 +139,39 @@ namespace TouhouStock
 
                 Thread.Sleep(1000);
             }
+        }
+
+        private void initPriceOfMarketOpened()
+        {
+            Random rand = new Random(Guid.NewGuid().GetHashCode());
+            for (int i = 0; i < GameData.companyArray.Count; i++)
+            {
+                CompanyData companyData = GameData.companyArray[i];
+                //漲0.1~1%，0.001  0.01
+
+                double dice1 = rand.NextDouble() * 100;
+                double dice2 = -rand.NextDouble() * 100;
+
+                double p = (dice1 + dice2) / 1000;
+                //p = 0.01;
+                p = Math.Round(p, 2, MidpointRounding.AwayFromZero);
+
+                GameData.companyArray[i].ChangePercent = p + "%";
+         
+
+                double NetChange = p * companyData.TodayPrice;
+                NetChange = Math.Round(NetChange, 2, MidpointRounding.AwayFromZero);
+           
+                companyData.ClosingPrice = companyData.TodayPrice + NetChange;
+
+                companyData.NetChange = NetChange + "";
+
+
+                companyData.ClosingPrice = companyData.ClosingPrice;
+            }
+
+
+            stockLabel.Text = gameData.getTotalStock() + "";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -218,42 +252,9 @@ namespace TouhouStock
             GameData.marketOpened = false;
             GameData.timeState = 1;
         }
-    }
-
-    public class CompanyData
-    {
-        public string CompanyName { get; set; }
-        public int IssuedShares { get; set; }
-        public string MarketCapitalization { get; set; }
-
-        public double TodayPrice { get; set; }
-        public double ClosingPrice { get; set; }
-
-        public string NetChange { get; set; }
-
-        public string ChangePercent { get; set; }
 
 
     }
 
-    public class HoldStock
-    {
-        public int numOfHold { get; set; }
-
-        public double totalPrice { get; set; }
-    }
-
-    public class MyStock
-    {
-        public string CompanyName { get; set; }
-        public int NumOfStock { get; set; }
-        public double OriPrice { get; set; }
-        public double NowPrice { get; set; }
-        public double Profit { get; set; }
-        public string ProfitRatio { get; set; }
-        
-
-
-
-    }
+   
 }

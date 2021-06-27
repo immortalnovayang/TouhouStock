@@ -19,6 +19,8 @@ namespace TouhouStock
         //public static double currentPrice = 200;
         public static int numOfStock = 0;
 
+        //每次跳幾分鐘
+        public static int minEveryTick = 10;
         //CompanyData[] companies;// = new CompanyData[1];
         public static List<CompanyData> companyArray;
 
@@ -167,5 +169,55 @@ namespace TouhouStock
 
             return sum;
         }
+    }
+
+    public class CompanyData
+    {
+        public string CompanyName { get; set; }
+        public int IssuedShares { get; set; }
+        public string MarketCapitalization { get; set; }
+
+        public double TodayPrice { get; set; }
+        public double ClosingPrice { get; set; }
+
+        public string NetChange { get; set; }
+
+        public string ChangePercent { get; set; }
+
+        //增加欄位後 要去datagridview新增 並且隱藏
+        public ComHiddenData comHiddenData { get; set; }
+    }
+
+    public class HoldStock
+    {
+        public int numOfHold { get; set; }
+
+        public double totalPrice { get; set; }
+    }
+
+    public class MyStock
+    {
+        public string CompanyName { get; set; }
+        public int NumOfStock { get; set; }
+        public double OriPrice { get; set; }
+        public double NowPrice { get; set; }
+        public double Profit { get; set; }
+        public string ProfitRatio { get; set; }
+
+
+
+
+    }
+
+    //公司隱藏資訊
+    public class ComHiddenData
+    {
+        //開盤分數 決定採用骰子
+
+        //盤中骰子
+        public int tickDice;
+
+        //buff列表
+        public List<string> BuffList { get; set; }
     }
 }

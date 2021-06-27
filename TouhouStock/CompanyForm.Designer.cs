@@ -32,6 +32,7 @@ namespace TouhouStock
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.CompanyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IssuedShares = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MarketCapitalization = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,7 +40,7 @@ namespace TouhouStock
             this.NetChange = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ChangePercent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TodayPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button2 = new System.Windows.Forms.Button();
+            this.ComHiddenData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,7 +55,8 @@ namespace TouhouStock
             this.ClosingPrice,
             this.NetChange,
             this.ChangePercent,
-            this.TodayPrice});
+            this.TodayPrice,
+            this.ComHiddenData});
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
@@ -86,9 +88,21 @@ namespace TouhouStock
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button2.Location = new System.Drawing.Point(426, 322);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(178, 70);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "賣出";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // CompanyName
             // 
             this.CompanyName.DataPropertyName = "CompanyName";
+            this.CompanyName.Frozen = true;
             this.CompanyName.HeaderText = "公司名稱";
             this.CompanyName.MinimumWidth = 6;
             this.CompanyName.Name = "CompanyName";
@@ -118,6 +132,7 @@ namespace TouhouStock
             // ClosingPrice
             // 
             this.ClosingPrice.DataPropertyName = "ClosingPrice";
+            this.ClosingPrice.Frozen = true;
             this.ClosingPrice.HeaderText = "成交價";
             this.ClosingPrice.MinimumWidth = 6;
             this.ClosingPrice.Name = "ClosingPrice";
@@ -127,6 +142,7 @@ namespace TouhouStock
             // NetChange
             // 
             this.NetChange.DataPropertyName = "NetChange";
+            this.NetChange.Frozen = true;
             this.NetChange.HeaderText = "漲跌";
             this.NetChange.MinimumWidth = 6;
             this.NetChange.Name = "NetChange";
@@ -136,6 +152,7 @@ namespace TouhouStock
             // ChangePercent
             // 
             this.ChangePercent.DataPropertyName = "ChangePercent";
+            this.ChangePercent.Frozen = true;
             this.ChangePercent.HeaderText = "漲跌(%)";
             this.ChangePercent.MinimumWidth = 6;
             this.ChangePercent.Name = "ChangePercent";
@@ -145,22 +162,22 @@ namespace TouhouStock
             // TodayPrice
             // 
             this.TodayPrice.DataPropertyName = "TodayPrice";
+            this.TodayPrice.Frozen = true;
             this.TodayPrice.HeaderText = "開盤價";
             this.TodayPrice.MinimumWidth = 6;
             this.TodayPrice.Name = "TodayPrice";
             this.TodayPrice.ReadOnly = true;
             this.TodayPrice.Width = 125;
             // 
-            // button2
+            // ComHiddenData
             // 
-            this.button2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(426, 322);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(178, 70);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "賣出";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.ComHiddenData.DataPropertyName = "ComHiddenData";
+            this.ComHiddenData.HeaderText = "ComHiddenData";
+            this.ComHiddenData.MinimumWidth = 6;
+            this.ComHiddenData.Name = "ComHiddenData";
+            this.ComHiddenData.ReadOnly = true;
+            this.ComHiddenData.Visible = false;
+            this.ComHiddenData.Width = 125;
             // 
             // CompanyForm
             // 
@@ -185,6 +202,7 @@ namespace TouhouStock
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DataGridViewTextBoxColumn CompanyName;
         private System.Windows.Forms.DataGridViewTextBoxColumn IssuedShares;
         private System.Windows.Forms.DataGridViewTextBoxColumn MarketCapitalization;
@@ -192,6 +210,6 @@ namespace TouhouStock
         private System.Windows.Forms.DataGridViewTextBoxColumn NetChange;
         private System.Windows.Forms.DataGridViewTextBoxColumn ChangePercent;
         private System.Windows.Forms.DataGridViewTextBoxColumn TodayPrice;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ComHiddenData;
     }
 }

@@ -51,6 +51,35 @@ namespace TouhouStock
 
         public void update()
         {
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (Convert.ToDouble(row.Cells[5].Value) > 0)
+                {
+                    row.Cells[6].Style.ForeColor = Color.Red;
+                }
+                else if (Convert.ToDouble(row.Cells[5].Value) < 0)
+                {
+                    row.Cells[6].Style.ForeColor = Color.Green;
+                }
+                else
+                {
+                    row.Cells[6].Style.ForeColor = Color.Black;
+                }
+
+                if (Convert.ToDouble(row.Cells[5].Value) > 0)
+                {
+                    row.Cells[5].Style.ForeColor = Color.Red;
+                }
+                else if (Convert.ToDouble(row.Cells[5].Value) < 0)
+                {
+                    row.Cells[5].Style.ForeColor = Color.Green;
+                }
+                else
+                {
+
+                    row.Cells[5].Style.ForeColor = Color.Black;
+                }
+            }
 
             dataGridView1.Update();
             dataGridView1.Refresh();
